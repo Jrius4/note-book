@@ -17,6 +17,10 @@ class TaskViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchAllTasks() {
+    _loadTasks();
+  }
+
   void addTask(String title) {
     final newTask = Task(title: title);
     _repository.addTask(newTask);

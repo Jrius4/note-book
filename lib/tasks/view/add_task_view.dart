@@ -32,7 +32,9 @@ class AddTaskView extends StatelessWidget {
           onPressed: () {
             if (editTask != null) {
               editTask.title = _controller.text;
-              viewModel.updateTask(editTask);
+              editTask.save();
+              // viewModel.updateTask(editTask);
+              viewModel.fetchAllTasks();
             } else {
               viewModel.addTask(_controller.text);
             }
