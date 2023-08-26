@@ -2,21 +2,26 @@ import 'package:hive/hive.dart';
 import './task.dart';
 
 class TaskRepository {
-  final Box<Task> _taskBox = Hive.box<Task>('tasks');
+  final Box<Task> taskBox = Hive.box<Task>('tasks');
 
-  List<Task> getAllTasks() {
-    return _taskBox.values.toList();
+  Future<List<Task>> getAllTasks() async {
+    return taskBox.values.toList();
   }
 
-  void addTask(Task task) {
-    _taskBox.add(task);
+  Future<void> addTask(Task task) async {
+    taskBox.add(task);
   }
 
   Future<void> markTask(Task task) async {
-    return await _taskBox.put(task.key, task);
+    return await taskBox.put(task.key, task);
+  }
+
+  Future<void> updateTask(Task task) async {
+    await task.save();
   }
 
   Future<void> deleteTask(Task task) async {
-    await _taskBox.delete(task.key);
+    // await taskBox.delete(task.key);
+    await task.delete();
   }
 }

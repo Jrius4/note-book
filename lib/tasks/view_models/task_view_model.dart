@@ -12,8 +12,8 @@ class TaskViewModel extends ChangeNotifier {
     _loadTasks();
   }
 
-  void _loadTasks() {
-    _tasks = _repository.getAllTasks();
+  void _loadTasks() async {
+    _tasks = await _repository.getAllTasks();
     notifyListeners();
   }
 
