@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:note_book/core/utils/utils.dart';
 import './task.dart';
 
 class TaskRepository {
@@ -9,19 +10,20 @@ class TaskRepository {
   }
 
   Future<void> addTask(Task task) async {
+    task.uuid = getUuid();
     taskBox.add(task);
   }
 
   Future<void> markTask(Task task) async {
-    return await taskBox.put(task.key, task);
+    return taskBox.put(task.key, task);
   }
 
   Future<void> updateTask(Task task) async {
-    await task.save();
+    task.save();
   }
 
   Future<void> deleteTask(Task task) async {
     // await taskBox.delete(task.key);
-    await task.delete();
+    task.delete();
   }
 }

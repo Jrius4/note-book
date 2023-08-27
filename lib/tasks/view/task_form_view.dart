@@ -14,16 +14,15 @@ class TaskFormView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tasksBloc = BlocProvider.of<TaskBloc>(context);
+    // final tasksBloc = BlocProvider.of<TaskBloc>(context);
     final Task? editTask = ModalRoute.of(context)?.settings.arguments as Task?;
-    inspect(ModalRoute.of(context)?.settings);
+
     if (editTask != null) {
-      inspect(editTask);
       _controller.text = editTask.title!;
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('${editTask == null ? "Add" : "Edit"}Task'),
+        title: Text('${editTask == null ? "Add Form" : "Edit Form"} Task'),
         elevation: 0,
       ),
       body: Column(children: [
@@ -35,15 +34,15 @@ class TaskFormView extends StatelessWidget {
             if (editTask == null) {
               final newTask = Task(title: _controller.text);
 
-              tasksBloc.add(SaveTaskEvent(newTask));
+              BlocProvider.of<TaskBloc>(context).add(SaveTaskEvent(newTask));
             } else {
               editTask.title = _controller.text;
-              tasksBloc.add(EditTaskEvent(editTask));
+              BlocProvider.of<TaskBloc>(context).add(EditTaskEvent(editTask));
             }
 
-            Navigator.pop(context);
+            Navigator.pushNamed(context, "/");
           },
-          child: Text(editTask == null ? "Add" : 'Edit'),
+          child: Text(editTask == null ? "Add" : 'Save Changes'),
         ),
       ]),
     );

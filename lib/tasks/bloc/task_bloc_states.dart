@@ -6,7 +6,7 @@ class TasksState extends Equatable {
   const TasksState({this.tasks});
 
   @override
-  List<Object> get props => [tasks!];
+  List<Object> get props => tasks != null ? [tasks!] : [];
 }
 
 class TasksLoading extends TasksState {
@@ -15,4 +15,8 @@ class TasksLoading extends TasksState {
 
 class TasksDone extends TasksState {
   const TasksDone(List<Task> tasks) : super(tasks: tasks);
+}
+
+class TasksError extends TasksState {
+  const TasksError();
 }

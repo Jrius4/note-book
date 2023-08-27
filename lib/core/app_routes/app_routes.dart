@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_book/tasks/view/add_task_view.dart';
-import 'package:note_book/tasks/view/task_list_view.dart';
-import 'package:note_book/tasks/view/with_bloc/list_tasks_view.dart';
-import 'package:note_book/tasks/view/with_bloc/task_form_view.dart';
+import 'package:note_book/tasks/view/list_tasks_view.dart';
+import 'package:note_book/tasks/view/task_form_view.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {

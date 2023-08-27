@@ -21,27 +21,58 @@ class TaskBloc extends Bloc<TaskEvent, TasksState> {
     on<DeleteTaskEvent>(onDeleteTaskEvent);
   }
 
-  void onGetTasksEvent(GetTasksEvent event, Emitter<TasksState> emit) async {
-    final tasks = await _getTasksUseCase();
-    emit(TasksDone(tasks));
+  void onGetTasksEvent(
+      GetTasksEvent getTasksEvent, Emitter<TasksState> emit) async {
+    try {
+      emit(const TasksLoading());
+      final tasks = await _getTasksUseCase();
+
+      emit(TasksDone(tasks));
+    } catch (e) {
+      Future.error(e);
+      emit(const TasksError());
+    }
   }
 
-  void onSaveTaskEvent(SaveTaskEvent event, Emitter<TasksState> emit) async {
-    await _saveTaskUseCase(params: event.task);
-    final tasks = await _getTasksUseCase();
-    emit(TasksDone(tasks));
+  void onSaveTaskEvent(
+      SaveTaskEvent saveTaskEvent, Emitter<TasksState> emit) async {
+    try {
+      emit(const TasksLoading());
+      await _saveTaskUseCase(params: saveTaskEvent.task);
+      final tasks = await _getTasksUseCase();
+
+      emit(TasksDone(tasks));
+    } catch (e) {
+      Future.error(e);
+      emit(const TasksError());
+    }
   }
 
-  void onEditTaskEvent(EditTaskEvent event, Emitter<TasksState> emit) async {
-    await _editTaskUseCase(params: event.task);
-    final tasks = await _getTasksUseCase();
-    emit(TasksDone(tasks));
+  void onEditTaskEvent(
+      EditTaskEvent editTaskEvent, Emitter<TasksState> emit) async {
+    try {
+      emit(const TasksLoading());
+      await _editTaskUseCase(params: editTaskEvent.task);
+      final tasks = await _getTasksUseCase();
+
+      emit(TasksDone(tasks));
+    } catch (e) {
+      Future.error(e);
+      emit(const TasksError());
+    }
   }
 
   void onDeleteTaskEvent(
-      DeleteTaskEvent event, Emitter<TasksState> emit) async {
-    await _deleteTaskUseCase(params: event.task);
-    final tasks = await _getTasksUseCase();
-    emit(TasksDone(tasks));
+      DeleteTaskEvent deleteTaskEvent, Emitter<TasksState> emit) async {
+    try {
+      emit(const TasksLoading());
+      await _deleteTaskUseCase(params: deleteTaskEvent.task);
+      final tasks = await _getTasksUseCase();
+
+      emit(TasksDone(tasks));
+    } catch (e) {
+      Future.error(e);
+      emit(const TasksError());
+    }
   }
 }

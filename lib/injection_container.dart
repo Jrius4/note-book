@@ -16,16 +16,20 @@ import 'package:note_book/tasks/usecases/save_task.dart';
 //             create: (context) => TaskBloc())
 final sl = GetIt.instance;
 Future<void> initializeDependencies() async {
+  // local databse
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
   sl.registerSingleton<Task>(Task());
 
   await Hive.openBox<Task>('tasks');
+
+  // remote
   sl.registerSingleton<Dio>(Dio());
 
   sl.registerSingleton<RemoteApiService>(RemoteApiService(sl()));
 
-  sl.registerSingleton<TaskRepository>(TaskRepositoryImpl(sl(), sl()));
+  sl.registerSingleton<TaskRepository>(TaskRepository());
+  // sl.registerSingleton<TaskRepository>(TaskRepositoryImpl(sl(), sl()));
 
   // use cases
   sl.registerSingleton<GetTasksUseCase>(GetTasksUseCase(sl()));
