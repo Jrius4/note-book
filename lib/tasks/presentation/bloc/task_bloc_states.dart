@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:note_book/tasks/data/task.dart';
+import 'package:note_book/tasks/domain/entities/task_entity.dart';
 
 class TasksState extends Equatable {
-  final List<Task>? tasks;
+  final List<TaskEntity>? tasks;
   const TasksState({this.tasks});
 
   @override
@@ -14,7 +14,7 @@ class TasksLoading extends TasksState {
 }
 
 class TasksDone extends TasksState {
-  const TasksDone(List<Task> tasks) : super(tasks: tasks);
+  const TasksDone(List<TaskEntity> tasks) : super(tasks: tasks);
 }
 
 class TasksError extends TasksState {

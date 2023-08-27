@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_book/tasks/bloc/task_bloc_events.dart';
-import 'package:note_book/tasks/bloc/task_bloc_states.dart';
-import 'package:note_book/tasks/usecases/delete_task.dart';
-import 'package:note_book/tasks/usecases/edit_task.dart';
-import 'package:note_book/tasks/usecases/get_tasks.dart';
-import 'package:note_book/tasks/usecases/save_task.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_events.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_states.dart';
+import 'package:note_book/tasks/domain/usecases/delete_task.dart';
+import 'package:note_book/tasks/domain/usecases/edit_task.dart';
+import 'package:note_book/tasks/domain/usecases/get_tasks.dart';
+import 'package:note_book/tasks/domain/usecases/save_task.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TasksState> {
   final GetTasksUseCase _getTasksUseCase;

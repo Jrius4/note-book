@@ -1,14 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_book/core/utils/utils.dart';
 import 'package:note_book/injection_container.dart';
-import 'package:note_book/tasks/bloc/task_bloc.dart';
-import 'package:note_book/tasks/bloc/task_bloc_events.dart';
-import 'package:note_book/tasks/bloc/task_bloc_states.dart';
-import 'package:note_book/tasks/data/task.dart';
+import 'package:note_book/tasks/domain/entities/task_entity.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_events.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_states.dart';
 
 class ListTaskView extends StatelessWidget {
   const ListTaskView({super.key});
@@ -51,14 +48,14 @@ class ListTaskView extends StatelessWidget {
     });
   }
 
-  Widget _buildTaskList(List<Task>? tasks) {
+  Widget _buildTaskList(List<TaskEntity>? tasks) {
     if (tasks == null) {
       return const Center(
         child: Text("SYSTEM ERROR"),
       );
     } else if (tasks.isEmpty) {
       return const Center(
-        child: Text("NO SAVED ARTICLES"),
+        child: Text("ADD NEW TASK"),
       );
     }
 
@@ -70,6 +67,15 @@ class ListTaskView extends StatelessWidget {
           return ListTile(
             dense: true,
             title: Text(task.title!),
+            subtitle: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("created At: ${task.createdAt ?? ''}"),
+                Text("update at: ${task.updatedAt ?? ''}"),
+                Text("cleared at: ${task.clearedAt ?? ''}"),
+              ],
+            ),
             trailing: SizedBox(
               width: 100,
               child: Row(

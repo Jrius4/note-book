@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_book/core/app_routes/app_routes.dart';
 import 'package:note_book/injection_container.dart';
-import 'package:note_book/tasks/bloc/task_bloc.dart';
-import 'package:note_book/tasks/bloc/task_bloc_events.dart';
-import 'package:note_book/tasks/view/list_tasks_view.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_events.dart';
+import 'package:note_book/tasks/presentation/view/list_tasks_view.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

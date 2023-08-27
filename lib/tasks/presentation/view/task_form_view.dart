@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_book/tasks/bloc/task_bloc.dart';
-import 'package:note_book/tasks/bloc/task_bloc_events.dart';
-import 'package:note_book/tasks/data/task.dart';
-import 'package:provider/provider.dart';
+import 'package:note_book/tasks/domain/entities/task_entity.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc.dart';
+import 'package:note_book/tasks/presentation/bloc/task_bloc_events.dart';
 import 'package:flutter/material.dart';
 
 class TaskFormView extends StatelessWidget {
@@ -15,7 +14,8 @@ class TaskFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final tasksBloc = BlocProvider.of<TaskBloc>(context);
-    final Task? editTask = ModalRoute.of(context)?.settings.arguments as Task?;
+    final TaskEntity? editTask =
+        ModalRoute.of(context)?.settings.arguments as TaskEntity?;
 
     if (editTask != null) {
       _controller.text = editTask.title!;
@@ -32,7 +32,7 @@ class TaskFormView extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             if (editTask == null) {
-              final newTask = Task(title: _controller.text);
+              final newTask = TaskEntity(title: _controller.text);
 
               BlocProvider.of<TaskBloc>(context).add(SaveTaskEvent(newTask));
             } else {
