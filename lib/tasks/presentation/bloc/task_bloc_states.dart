@@ -6,7 +6,7 @@ class TasksState extends Equatable {
   const TasksState({this.tasks});
 
   @override
-  List<Object> get props => tasks != null ? [tasks!] : [];
+  List<Object?> get props => [tasks];
 }
 
 class TasksLoading extends TasksState {

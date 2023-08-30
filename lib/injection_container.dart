@@ -29,7 +29,6 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<RemoteApiService>(RemoteApiService(sl()));
 
   sl.registerSingleton<TaskRepository>(TaskRepositoryImpl(sl()));
-  // sl.registerSingleton<TaskRepository>(TaskRepositoryImpl(sl(), sl()));
 
   // use cases
   sl.registerSingleton<GetTasksUseCase>(GetTasksUseCase(sl()));
